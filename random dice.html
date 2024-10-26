@@ -13,7 +13,13 @@
 </h1>
 <h2  class="text-white col col-5 mx-auto text-center">
     <input id="dice" type="number" class="rounded">
+    <br><br>
 </h2>
+<h1 class="text-white col col-5 mx-auto text-center">
+    max number of dice :
+    <input id="max-dice" type="number" class="rounded">
+</h1>
+
 <br><br>
 <br>
 <h1 id="dices" class="text-white col col-5 mx-auto text-center"></h1>
@@ -22,19 +28,42 @@
         throw dices
     </button>
 </div>
+<div class=" mt-5 mx-auto text-center">
+    <h1 class="text-white col col-5 mx-auto text-center">
+        min
+        <input id="min" type="number" class="rounded">
+    </h1>
+    <h1 class="text-white col col-5 mx-auto text-center">
+        max 
+        <input id="max" type="number" class="rounded">
+    </h1>
+    <h1 id="gen" class="text-white">
+        0
+    </h1>
+    <button id="generate" class="rounded btn btn-primary">
+        generate
+    </button>
+    </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
 $(document).ready(function(){
     $('#btn-dice').click(function(){
         let dices = [];
         let dice_number = $('#dice').val();
+        let max = $('#max-dice').val()
         for(let i = 0; i < dice_number ; i++){
-           let rnd = Math.floor(Math.random() * 6)+1;
+           let rnd = Math.floor(Math.random() * max)+1;
            dices.push(rnd);
-           console.log(Math.floor(Math.random() * 6));
         }
         $('#dices').text(dices.join(', '));
     });  
+    $('#generate').click(function(){
+    let min = parseInt($('#min').val(), 10);
+    let max = parseInt($('#max').val(), 10);
+    let generate = Math.floor(Math.random() * (max - min)) + min;
+    console.log(generate);
+    $('#gen').text(generate);
+});
 });
 
 </script>

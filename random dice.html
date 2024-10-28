@@ -44,9 +44,27 @@
         generate
     </button>
     </div>
+    <br><br>
+    <div class="row">
+        <div id="menu" class=" col col-6 d-inline text-center text-white">
+            
+        </div>
+        <div class="col col-6 d-inline text-center text-white">
+            <input type="text" id="menu_input" class="rounded">
+            <br>
+            <button id="add_to" class="mt-2 btn btn-primary">
+                add to menu
+            </button>
+            <br>
+            <button id="randomise" class="mt-2 btn btn-primary">
+                random select
+            </button>
+        </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
 $(document).ready(function(){
+    let num = []; 
     $('#btn-dice').click(function(){
         let dices = [];
         let dice_number = $('#dice').val();
@@ -57,6 +75,26 @@ $(document).ready(function(){
         }
         $('#dices').text(dices.join(', '));
     });  
+    $('#add_to').on('click',function(){
+        let menu = $('#menu_input').val();
+        if(menu == ''){
+            alert('please input a text');
+        } else {
+            num.push(menu);
+            $('#menu').append('<div class="menu-item"><p>'+menu+'</p><button class="delete btn btn-danger">X</button></div>');
+            $('#menu_input').val('');}
+        });
+    $('#randomise').click(function(){
+        if(num.length === 0){
+            alert('No items to randomise');
+        } else {
+            let rnd2 = Math.floor(Math.random() * num.length);
+            alert(num[rnd2]);
+        }
+    });
+    $('#menu').on('click', '.delete', function(){
+        $(this).parent().remove();
+    });
     $('#generate').click(function(){
     let min = parseInt($('#min').val(), 10);
     let max = parseInt($('#max').val(), 10);
